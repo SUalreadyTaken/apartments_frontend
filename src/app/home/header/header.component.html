@@ -1,0 +1,26 @@
+<div style="float: right;">
+  <div *ngIf="!isLoggedIn; else logginBlock" style="margin-right: 50px;">
+    <button (click)="onLogin()">Login</button>
+    <button (click)="onRegister()">Register</button>
+  </div>
+  <ng-template #logginBlock>
+    <div style="display: inline-block; margin-right:10px">
+      <p style="font-size: large;">Hello {{ user.email }}</p>
+    </div>
+    <div style="display: inline-block; vertical-align: top; margin-right:50px">
+      <div class="btn-group" dropdown #dropdown="bs-dropdown" [insideClick]="true">
+        <div dropdownToggle class="pointer">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+        <ul *dropdownMenu class="dropdown-menu dropdown-menu-right">
+          <li class="dropdown-item pointer" (click)="onLogout()">Logout</li>
+          <li class="dropdown-item pointer">1</li>
+          <li class="dropdown-item pointer">2</li>
+          <li class="dropdown-item pointer"><button (click)="onLogin()">Get login popup</button></li>
+        </ul>
+      </div>
+    </div>
+  </ng-template>
+</div>

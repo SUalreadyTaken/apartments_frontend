@@ -1,0 +1,73 @@
+<h1 id="login-header">{{ currentPage.caption }}</h1>
+<form class="login-form" [formGroup]="form" (ngSubmit)="activate(page)">
+  <!-- EMAIL -->
+  <div *ngIf="form.contains('email')" class="login-form">
+    <input type="text" id="email" name="username" class="login-form-field" placeholder="Email" formControlName="email">
+    <div *ngIf="form.controls.email.dirty">
+      <!-- <mat-error *ngIf="form.controls.email.errors?.required && form.controls.email.touched && !form.controls.email.pristine" class="form-error-msg"> -->
+      <mat-error *ngIf="form.controls.email.errors?.required && !form.controls.email.pristine" class="form-error-msg">
+        Please specify an email address <br>
+      </mat-error>
+      <mat-error *ngIf="form.controls.email.errors?.pattern || !emailError.disappear" class="form-error-msg">
+        Ooops! it looks like this is not a valid email
+      </mat-error>
+    </div>
+    <!-- TODO make it a bit fancier -->
+    <p *ngIf="recoverMessage !== ''"> {{ recoverMessage }}</p>
+  </div>
+  <!-- PASSWORD -->
+  <div *ngIf="form.contains('password')" class="login-form">
+    <input *ngIf="form.contains('password')" type="password" id="password" class="login-form-field"
+      placeholder="Password" formControlName="password">
+    <mat-error
+      *ngIf="form.controls.password.errors?.required && form.controls.password.touched && !form.controls.password.pristine"
+      class="form-error-msg">
+      A password is required
+    </mat-error>
+    <mat-error *ngIf="page !== 'signIn' && (form.controls.password.errors?.minLengthError || !passwordError.disappear)" class="form-error-msg">
+      Password length must be greater than 8
+    </mat-error>
+  </div>
+  <!-- CONFIRM PASSWORD -->
+  <div *ngIf="form.contains('passwordConfirm')" class="login-form">
+    <input type="password" id="passwordConfirm" class="login-form-field" placeholder="Confirm Password"
+      formControlName="passwordConfirm">
+    <!-- <mat-error *ngIf="form.controls.passwordConfirm.errors?.required && form.controls.passwordConfirm.touched && !form.controls.passwordConfirm.pristine"
+      class="form-error-msg">
+      Confirm the password
+    </mat-error> -->
+    <mat-error *ngIf="form.controls.passwordConfirm.dirty && (form.controls.passwordConfirm.errors?.notMatching || !passwordConfirmError.disappear)"
+      class="form-error-msg">
+      Password dont match
+    </mat-error>
+  </div>
+  <div *ngIf="errorMessage !== null">
+    <mat-error class="form-error-msg">
+      {{errorMessage}}
+    </mat-error>
+  </div>
+  <button type="submit" [disabled]="!form.valid" id="login-form-submit" style="margin-top:10px">
+    {{ currentPage.caption }}
+  </button>
+  <!-- <button *ngIf="page !== 'forgotPassword'; else forgotBlock" type="submit" [disabled]="!form.valid" id="login-form-submit" style="margin-top:10px">
+    {{ currentPage.caption }}
+  </button>
+  <ng-template #forgotBlock>
+    <button type="submit" [disabled]="form.controls.email.errors?.required" id="login-form-submit" style="margin-top:10px">
+      {{ currentPage.caption }}
+    </button>
+  </ng-template> -->
+  
+
+</form>
+<div *ngIf="page !== 'register'" (click)="switchPage('register')" class="form-register">
+  <span>Register</span>
+</div>
+<div *ngIf="page !== 'register' && page !== 'forgotPassword'" (click)="switchPage('forgotPassword')" class="form-register">
+  <span>Forgot password</span>
+</div>
+<br>
+<br>
+<span class="pointer" (click)="logForm()">Log form</span>
+<span>Page >> {{ page }}</span>
+<span>errorMessage >> {{ errorMessage }}</span>

@@ -1,0 +1,94 @@
+/* :host {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: stretch;
+  width: 300px;
+  max-width: 100%;
+  text-align: center;
+}
+:host .btn {
+  margin-top: 10px;
+  min-height: 48px;
+}
+:host .providers {
+  font-size: 1.5em;
+}
+
+*/
+
+:host {
+  width: 300px;
+  max-width: 100%;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  background-color: white;
+}
+
+/* #main-holder {
+  width: 300px;
+  max-width: 100%;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  background-color: white;
+} */
+
+.login-form {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.login-form-field::placeholder {
+  color: #3a3a3a;
+}
+
+.login-form-field {
+  border: none;
+  border-bottom: 1px solid #3a3a3a;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  outline: none;
+  padding: 0px 0px 5px 5px;
+}
+
+#login-form-submit {
+  width: 160px;
+  padding: 7px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  background-color: #3a3a3a;
+  cursor: pointer;
+  outline: none;
+}
+
+#login-form-submit:disabled {
+  background-color: #afafaf;
+}
+
+.form-error-msg {
+  color: red;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  white-space: pre-line;
+}
+
+.form-register {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top:5px;
+  /* margin-top: 12px;
+  margin-bottom: 12px;
+  height: 30px; */
+  cursor: pointer;
+}
+
+.pointer {
+  cursor: pointer;
+}

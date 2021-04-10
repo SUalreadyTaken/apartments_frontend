@@ -1,0 +1,169 @@
+<div class="container10" style="width: 100%;">
+  <!-- Form search -->
+  <div class="container10 search-container">
+    <form class="form-search" [formGroup]="form">
+      <div class="">
+        <!-- Dropdown cityParts -->
+        <div class="btn-group" dropdown #dropdown="bs-dropdown" [insideClick]="true">
+          <button dropdownToggle type="button" class="dropdown-toggle pointer">
+            Select City Part <span class="caret"></span>
+          </button>
+          <ul *dropdownMenu class="dropdown-menu cityPart-dropdown" style="list-style: none;">
+            <li *ngFor="let cityPart of cityPartList" class="dropdown-item  pointer cityPart-not-selected"
+              id={{cityPart}} (click)="onSelectCityPart($event)">
+              {{ cityPart }}
+            </li>
+          </ul>
+        </div>
+        <!-- Display selected city parts -->
+        <div class="tmp2-row">
+          <div class="tmp2-column" style="width: 165px;">
+            <p *ngFor="let cityPart of selectedCityParts" class="pointer" (click)="onRemoveSelectedCityPart($event)">
+              <span >{{cityPart}}</span>
+            </p>
+          </div>
+          <!-- Form inputs -->
+          <div class="tmp2-column tmp-table">
+            <div class="tmp-row">
+              <label class="tmp-label">Price</label>
+              <input class="tmp-input form-input" type="number" id="priceMin" formControlName="priceMin"><span
+                class="form-input-dash tmp-span">-</span><input class="form-input" id="priceMax"
+                formControlName="priceMax" name="priceMax" type="number">
+            </div>
+            <div class="tmp-row">
+              <label class="tmp-label">Rooms</label>
+              <input class="tmp-input form-input" type="number" id="roomsMin" formControlName="roomsMin"><span
+                class="tmp-span form-input-dash">-</span><input class="tmp-input form-input" type="number" id="roomsMax"
+                formControlName="roomsMax">
+            </div>
+            <div class="tmp-row">
+              <label class="tmp-label">m2</label>
+              <input class="tmp-input form-input" type="number" id="m2Min" formControlName="m2Min"><span
+                class="tmp-span form-input-dash">-</span><input class="tmp-input form-input" type="number" id="m2Max"
+                formControlName="m2Max">
+            </div>
+            <div class="tmp-row">
+              <label class="tmp-label">m2 Price</label>
+              <input class="tmp-input form-input" type="number" id="m2PriceMin" formControlName="m2PriceMin"><span
+                class="tmp-span form-input-dash">-</span><input class="tmp-input form-input" type="number"
+                id="m2PriceMax" formControlName="m2PriceMax">
+            </div>
+            <!-- Error messages -->
+            <div class="form-p-error" *ngIf="form.get('priceMax').getError('incorrect')">
+              <span class="form-span-error">Max price must be
+                greater</span>
+            </div>
+            <div class="form-p-error" *ngIf="form.get('roomsMax').getError('incorrect')">
+              <span class="form-span-error">Max rooms must be
+                greater</span>
+            </div>
+            <p class="form-p-error" *ngIf="form.get('m2Max').getError('incorrect')">
+              <span class="form-span-error">Max m2 must be
+                greater</span>
+            </p>
+            <p class="form-p-error" *ngIf="form.get('m2PriceMax').getError('incorrect')">
+              <span class="form-span-error">Max m2price must be
+                greater long ass message yeeeeeeee eeeeeee eeeeasdasda dasdasd asdasdasd</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </form>
+    <button class="form-search-button pointer" [disabled]="!form.valid" (click)="onSearch()">
+      Search
+    </button>
+  </div>
+  <!-- Page -->
+  <div class="container10 page-container">
+    <div>
+      <button class="pointer page-triangle button-triangle" (click)="goToPage(-1)">◀</button>
+      {{ page }}
+      <button class="pointer page-triangle button-triangle" (click)="goToPage(1)">▶</button>
+    </div>
+  </div>
+  <!-- Table -->
+  <div class="container10" style="width:100%">
+    <table *ngIf="loaded"
+      style="border-collapse: separate; border-spacing: 0 10px; table-layout: fixed; width: inherit;">
+      <thead>
+        <tr>
+          <!-- <th style="width: 79px;"></th>  -->
+          <!-- LOGO-->
+          <th class="image-preview" style="width: 229px;"></th>
+          <th style="width: 59%;"></th>
+          <th class="text-center pointer" (click)="onSortDate()" style="width: 100px;">LISATUD
+            <span>{{ dateSort }}</span>
+          </th>
+          <th class="text-center pointer" (click)="onSortPrice()" style="width: 80px;">
+            Hind<span>{{ priceSort }}</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let apartment of apartmentList">
+          <!-- Image -->
+          <td class="show-border image-preview">
+            <img class="apartment-image" [src]="apartment.imgUrl" data-original="{{ apartment.imgUrl }}" />
+          </td>
+          <!-- Description -->
+          <td class="show-border description-box">
+            <div class="pointer" (click)="goToSite(apartment.url)">
+              <div class="" style="display: inline-block; margin-top: 3px">
+                <img *ngIf="apartment.site == 'kv'; else c24block" [src]="kvLogo" data-original="kvLogo" width="75"
+                  height="32" alt="" style="display: block;" />
+                <ng-template #c24block>
+                  <img [src]="city24Logo" data-original="city24Logo" width="75" height="32" alt=""
+                    style="display: block;" />
+                </ng-template>
+              </div>
+              <!-- 10px whitespace div instead of  margin.. resize-->
+              <div style="width:10px; display: inline-block;"></div>
+              <div style="display: inline-block; vertical-align: top;">
+                <h2> {{ apartment.title }} </h2>
+              </div>
+            </div>
+            <div class="show-border">
+              <span> {{ apartment.description }} </span>
+              <br *ngIf="apartment.description !== ''">
+              <br *ngIf="apartment.description !== ''">
+              <span class="">Tube: {{ apartment.rooms !== 0 ?  apartment.rooms : '-' }}</span>
+              <br>
+              <span class="">Ruute: {{ apartment.m2 !== 0 ? apartment.m2 : '-' }} </span>
+              <br>
+              <span class="">Ruudu hind: {{ apartment.m2Price !== 0 ? apartment.m2Price : '-' }} </span>
+              <br>
+              <span class="">Energiamärgis: {{ apartment.energy !== '' ? apartment.energy : '-' }} </span>
+              <br>
+              <span class="">Korrus: {{ apartment.floor !== '' ? apartment.floor : '-' }} </span>
+              <br>
+              <span class="">Omandivorm: {{ apartment.propertyOf !== '' ? apartment.propertyOf : '-' }} </span>
+              <br>
+              <span class="">Seisukord: {{ apartment.condition !== '' ? apartment.condition : '-' }} </span>
+              <br>
+              <span class="">Ehitusaasta: {{ apartment.buildYear !== 0 ? apartment.buildYear : '-' }} </span>
+            </div>
+            <p></p>
+          </td>
+          <!-- Added date -->
+          <td class="show-border text-center">
+            <span class="">{{ apartment.date | date: 'd.M.yyyy' }}</span>
+            <br />
+            <span *ngIf="(dateToday | date: 'dd/MM/yyyy') == (apartment.date | date: 'dd/MM/yyyy')" class="">
+              {{ apartment.date | date: 'HH:mm' }}</span>
+          </td>
+          <!-- Price -->
+          <td class="show-border text-center">
+            <span>{{ apartment.price }} €</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- Page -->
+  <div *ngIf="loaded" class="container10 page-container">
+    <div>
+      <button class="pointer page-triangle button-triangle" (click)="goToPage(-1)">◀</button>
+      {{ page }}
+      <button class="pointer page-triangle button-triangle" (click)="goToPage(1)">▶</button>
+    </div>
+  </div>
+</div>

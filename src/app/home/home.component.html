@@ -1,0 +1,25 @@
+<!-- <div gdAreas="header header | side center side  | footer footer" gdGap="16px" gdRows="auto auto auto">
+  <div gdArea="header">This is a header</div>
+  <div gdArea="side">This is a side</div>
+  <div gdArea="center">This is a center</div>
+  <div gdArea="side">This is a side2</div>
+  <div gdArea="footer">This is a footer</div>
+</div> -->
+
+<div gdAreas="header | content | footer" gdGap="10px"
+  gdAreas.gt-md="header header header | sidebar content sidebar2 | footer footer footer"
+  gdColumns.gt-md="120px auto 120px" gdGap.gt-sm="10px" [ngStyle]="{'max-width': 'auto'}">
+  <div class="blocks one" style="border-style: solid;
+  border-color: red;
+  border-width: 1px;" gdArea="header">
+    <app-header></app-header>
+  </div>
+  <div class="blocks four" gdArea="content">
+    <!-- Stupid way but this has to do for now -->
+    <app-recover *ngIf="page === 'recover'"></app-recover>
+    <app-apartments *ngIf="page === 'apartments'"></app-apartments>
+  </div>
+  <div class="blocks five" style="border-style: solid;
+  border-color: red;
+  border-width: 1px;" gdArea="footer">Footer</div>
+</div>

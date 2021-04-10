@@ -1,0 +1,15 @@
+
+.pointer {
+  cursor: pointer;
+}
+
+.bar {
+  width: 20px;
+  height: 2px;
+  background-color: #333;
+  margin: 2px 0;
+}
+
+/* .settings-button {
+
+} */

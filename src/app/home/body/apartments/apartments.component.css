@@ -1,0 +1,163 @@
+/* Remobe Arrows/Spinners from input */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+@media screen and (max-width: 1000px) {
+  .apartment-image {
+    display: none !important;
+  }
+  .image-preview {
+    display: none !important;
+  }
+}
+/* @media (min-width: 224px) {
+  .apartment-image {
+    display: none;
+  }
+} */
+
+.container10 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.apartment-image {
+  height: 150px;
+  width: 100%;
+  display: block;
+}
+
+.main {
+  border-color: black;
+  border-width: 200px;
+  background-color: aqua;
+  border-style: solid;
+}
+
+.show-border {
+  border-style: solid;
+  border-color: red;
+  border-width: 1px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.description-box {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+}
+
+.info-box {
+  padding-left: 10px;
+}
+
+.cityPart-selected {
+  background-color: blue;
+}
+
+.cityPart-dropdown {
+  height: 180px;
+  overflow: scroll;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.page-container {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+/* .page-triangle {
+  padding-left: 10px;
+  padding-right: 10px;
+} */
+
+.page-triangle {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.button-triangle {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+button.button-triangle:focus {
+  outline: none;
+}
+
+.form-search-button {
+  float: right;
+}
+
+.form-input {
+  max-width: 80px;
+  text-align: center;
+}
+
+.form-input-dash {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.tmp-table {
+  display: table;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.tmp-row {
+  display: table-row;
+}
+.tmp-label {
+  display: table-cell;
+  padding-right: 20px;
+}
+.tmp-input {
+  display: table-cell;
+}
+.tmp-span {
+  display: table-cell;
+}
+
+.form-search {
+  display: flex;
+  justify-content: center;
+}
+
+.tmp2-row {
+  display: table;
+  table-layout: fixed;
+}
+
+.tmp2-column {
+  display: table-cell;
+}
+
+.form-span-error {
+  color: red;
+  max-width: inherit;
+}
+
+.form-p-error{
+  max-width: 280px;
+}
+.search-container{
+  padding-top: 10px;
+}
